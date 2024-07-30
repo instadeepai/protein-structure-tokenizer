@@ -1,0 +1,142 @@
+features:
+  use_positional_features: true
+  use_residual_information: false
+  use_mean_node_features: false # This is the cause of NaN's/infs.
+  use_surface_aware_features: false  # This is the cause of NaN's/infs.
+
+model:
+  encoder:
+    encoding_dimension: 128
+    residue_embedding_dim: 128
+    positional_encoding_dimension: 128
+    gnn:
+      shared_layers: false
+      gnn_number_layers: 3
+      gnn_layer:
+        layer_cls: "GNNLayer"
+        hidden_dimension: 128 # (default)
+
+  down_sampler:
+    normalization: spherical
+    out_emb_size: 128 # BG: must be equal to len(codebook.levels) if not down_proj.emb_proj
+    max_out_len: 64
+    use_original_posenc: false
+    use_local_attn: false
+    use_global_node: false
+    sc_num_block: 3
+    cross_attn: {
+      dropout_rate: 0.0,
+      gating: true,
+      num_head: 4, # BG: must have codebook.codes_dimension % num_head == 0 if not down_proj.emb_proj
+      orientation: per_row,
+      shared_dropout: true,
+      subbatch_size: null # TB-hack
+    }
+    resampled_transition: {
+      dropout_rate: 0.0,
+      num_intermediate_factor: 2,
+      orientation: per_row,
+      shared_dropout: true,
+      subbatch_size: null # TB-hack
+    }
+    original_transition: {
+      dropout_rate: 0.0,
+      num_intermediate_factor: 2,
+      orientation: per_row,
+      shared_dropout: true,
+      subbatch_size: null # TB-hack
+    }
+
+  down_proj:
+    emb_proj: true
+    emb_dim: 6
+
+  codebook:
+    use_codebook: true
+    method: 'fsq'
+    num_codes: 64000
+    codes_dimension: 6
+    # fsq special
+    levels: [8,8,8,5,5,5]
+    is_explicit: false # should be false for fsq
+    renorm: false
+
+  up_sampler:
+    normalization: false
+    out_emb_size: 128 # BG: must be equals to encoder.encoding_dimension
+    max_out_len: 256 # Bg: must be equal to training.data.seq_max_size
+    use_original_posenc: true
+    use_local_attn: false
+    use_global_node: false
+    sc_num_block: 3
+    cross_attn: {
+      dropout_rate: 0.0,
+      gating: true,
+      num_head: 4,
+      orientation: per_row,
+      shared_dropout: true,
+      subbatch_size: null # TB-hack
+    }
+    resampled_transition: {
+      dropout_rate: 0.0,
+      num_intermediate_factor: 2,
+      orientation: per_row,
+      shared_dropout: true,
+      subbatch_size: null # TB-hack
+    }
+    original_transition: {
+      dropout_rate: 0.0,
+      num_intermediate_factor: 2,
+      orientation: per_row,
+      shared_dropout: true,
+      subbatch_size: null # TB-hack
+    }
+
+  decoder:
+    pair_representation:
+      lnormalisation: true
+      num_intermediate_factor: 2
+      output_dim: 128
+    positional_encoding_dimension: 128
+    encoding_dimension: 128
+    pair_transition: {
+      dropout_rate: 0.0,
+      num_intermediate_factor: 2,
+      orientation: per_row,
+      shared_dropout: true,
+      subbatch_size: null # TB-hack
+    }
+    multihead_attention:
+      num_layers: 0
+      dimension: 128
+      num_heads: 4
+      max_len: 32
+
+  structure_module:
+    compute_in_graph_metrics: true
+    dropout: 0.0
+    fape: {
+      clamp_distance: 10.0,
+      loss_unit_distance: 10.0,
+      pct_unclamped: 0.0
+    }
+    no_ipa: false
+    num_channel: 384
+    num_head: 12
+    num_layer: 8
+    num_layer_in_transition: 3
+    num_point_qk: 4
+    num_point_v: 8
+    num_scalar_qk: 16
+    num_scalar_v: 16
+    position_scale: 10.0
+    sidechain: {
+      atom_clamp_distance: 10.0,
+      length_scale: 10.0,
+      num_channel: 128,
+      num_residual_block: 2,
+      weight_frac: 0.5
+    }
+    weight: 1.0
+
+tags : ["vq3d"]

@@ -1,0 +1,33 @@
+name: structure-tokenizer
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.24
+  - biopandas=0.4
+  - six=1.15.0
+  - scikit-learn=1.2
+  - tqdm=4.56
+  - xgboost=1.6
+  - pip=21.0.1
+  - jupyter
+  - jupyterlab_code_formatter
+  - pre-commit
+  - biopython=1.80
+  - matplotlib=3.6
+  - neptune-client=0.16
+  - protobuf=3.20.2
+  - regex=2022.1.18
+  - tqdm=4.56.0
+  - joblib=1.1
+  - python-dotenv=0.21.0
+  - dm-tree
+
+  - pip:
+#    - jax[cpu]==0.4.23
+#    - jaxlib==0.4.23
+#    - jax[cuda]
+#    - jaxlib == 0.4.23
+    - --find-links https://storage.googleapis.com/jax-releases/libtpu_releases.html
+    - --find-links https://storage.googleapis.com/jax-releases/jax_releases.html
+    - -r requirements.txt

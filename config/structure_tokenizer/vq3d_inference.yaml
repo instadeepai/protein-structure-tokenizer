@@ -1,0 +1,5 @@
+defaults:
+  - model: ablation_4k_df_1.yaml
+  - data: ablation_1.yaml
+
+random_seed: 0
