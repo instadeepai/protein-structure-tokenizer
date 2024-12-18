@@ -1,0 +1,66 @@
+defaults:
+  - shared
+
+model:
+  denoising: false
+  encoder:
+    encoding_dimension: 128
+    residue_embedding_dim: 128
+    positional_encoding_dimension: 128
+    use_gnn_encoder: true
+    gnn:
+      gnn_layer:
+        layer_cls: "MPNNLayer"
+
+  decoder:
+    positional_encoding_dimension: 128
+    encoding_dimension: 128
+    pair_representation:
+      output_dim: 128
+
+  down_sampler:
+    normalization: spherical
+    out_emb_size: 128 # BG: must be equal to len(codebook.levels) if not down_proj.emb_proj
+    max_out_len: 512
+    use_original_posenc: false
+    sc_num_block: 3
+    causal_attn: false
+    use_local_attn: true
+    use_global_node: 0
+    cross_attn: {
+      num_head: 4, # BG: must have codebook.codes_dimension % num_head == 0 if not down_proj.emb_proj
+    }
+
+  down_proj:
+    emb_proj: true
+    emb_dim: 6
+
+  codebook:
+    use_codebook: false
+    method: 'fsq'
+    levels: [8, 8 ,8, 5, 5, 5]
+    num_codes: 64000
+    codes_dimension: 6
+    renorm: false
+
+  up_proj:
+    emb_proj: true
+    emb_dim: 128
+
+  up_sampler:
+    normalization: spherical
+    out_emb_size: 128
+    max_out_len: 512
+    use_original_posenc: true
+    positional_encoding_dimension: 128
+    sc_num_block: 3
+    use_local_attn: false
+    use_global_node: 0
+    cross_attn: {
+      num_head: 4, # BG: must have codebook.codes_dimension % num_head == 0 if not up_proj.emb_proj
+    }
+
+  structure_module:
+    fape: {
+      pct_unclamped: 0.0
+    }

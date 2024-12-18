@@ -1,0 +1,23 @@
+mixed_precision: false
+
+init:
+  distribution: "truncated_normal"
+  scale: 1.
+  mode: "fan_in"
+
+# legacy config for sm
+deterministic: false
+
+use_remat: true
+zero_init: false
+random_seed: 123
+
+data:
+  noise_level: 0.
+  seq_max_size: 512
+  min_num_valid_res: 50
+  downsampling_ratio: 4
+  batch_size_per_device: 16
+  graph_residue_loc_is_alphac: true
+  graph_max_neighbor: 50
+  pad_token_id: 4097

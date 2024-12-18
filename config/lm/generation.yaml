@@ -1,0 +1,3 @@
+defaults:
+  - model: gpt_4k_df_1
+  - sampling: sampling.yaml
