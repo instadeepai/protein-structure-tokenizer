@@ -43,7 +43,7 @@ StraightThroughQuantized: TypeAlias = jnp.ndarray
 
 
 class GraphNeuralNetwork(hk.Module):
-    """Independent-Equivariant Graph Matching Newtork"""
+    """Independent-Equivariant Graph Matching Network"""
 
     def __init__(
         self,
@@ -383,7 +383,7 @@ class Attention(hk.Module):
 
 
 class CrossAttention(hk.Module):
-    """Single rows cross-attention for re sampling seq. lenght."""
+    """Single rows cross-attention for re sampling seq. length."""
 
     def __init__(self, config, global_config, name="resampling_cross_attention"):
         super().__init__(name=name)
@@ -664,7 +664,7 @@ class PairwiseRepresentation(hk.Module):
         obtain two vectors (N_residues, input_dim) from a single vector
         (N_residues, input_dim)
 
-        Then outter product them --> (N_residues, N_residues, input_dim)
+        Then outer product them --> (N_residues, N_residues, input_dim)
 
         and scale --> (N_residues, N_residues, outdim)
 
@@ -697,7 +697,7 @@ class PairwiseRepresentation(hk.Module):
             w_init=self.w_init,
         )(x)
 
-        # now perform outter product
+        # now perform outer product
         init_pairwise_representation = jnp.einsum(
             "...nd, ...kd -> ...nkd ", left_proj, right_proj
         )

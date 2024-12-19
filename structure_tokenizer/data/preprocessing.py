@@ -68,7 +68,7 @@ def preprocess_sample(
     # Building protein graph
     atom37_coords = sample.atom37_positions
 
-    # carefull, this can be tricky !
+    # carefully, this can be tricky !
     atom37_mask = sample.atom37_gt_exists & sample.atom37_atom_exists
     missing_coords_residue_mask = sample.get_missing_backbone_coords_mask()
 
