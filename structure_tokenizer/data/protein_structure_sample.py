@@ -151,7 +151,7 @@ class ProteinStructureSample(NamedTuple):
             * self.atom37_gt_exists[..., atom37_atom_to_idx["CA"]].astype(np.float32)
             * self.atom37_gt_exists[..., atom37_atom_to_idx["C"]].astype(np.float32)
         )
-        # rigid groupd features
+        # rigid grouped features
         rigidgroups_features = all_atom.atom37_to_frames(
             np.argmax(self.aatype, axis=-1),
             self.atom37_positions,

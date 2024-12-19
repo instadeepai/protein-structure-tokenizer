@@ -25,7 +25,7 @@ from structure_tokenizer.types import EdgeFeatures, NodeFeatures
 
 
 class PositionalEncodingLayer(hk.Module):
-    """Independent-Equivariant Graph Matching Newtork"""
+    """Independent-Equivariant Graph Matching Network"""
 
     def __init__(self, positional_encoding_dimension: int):
         """Initializes a Positional Encoding Layer

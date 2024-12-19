@@ -89,7 +89,7 @@ class FiniteScalarCodebook(hk.Module):
         super().__init__(name)
         self.config = config
 
-        # definine the finite grid (aka implicit codebook)
+        # define the finite grid (aka implicit codebook)
         self.levels = config.levels
         self.levels_jnp = jnp.asarray(config.levels)
         self.basis = jnp.concatenate(
@@ -120,7 +120,7 @@ class FiniteScalarCodebook(hk.Module):
         return (zhat * self.basis).sum(axis=-1).astype(jnp.uint32)
 
     def indexes_to_codes(self, indices):
-        """Inverse of ‘indexes_to_codes‘, optionnaly not renorming"""
+        """Inverse of ‘indexes_to_codes‘, optionally not renorming"""
 
         basis = jnp.concatenate(
             (jnp.ones((1,)), jnp.cumprod(self.levels_jnp[:-1]))

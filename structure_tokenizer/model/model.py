@@ -250,7 +250,7 @@ class Vq3D(hk.Module):
         #
         quantized_emb["quantize_post_proj"] = quantized_proj
 
-        # Strucutre module
+        # Structure module
         representation = {"single": s_i, "pair": z_ij}
         decoded_structure = self.structure_module(
             representation, batch.features, nodes_mask
@@ -576,7 +576,7 @@ class ForwardVQ3D(hk.Module):
     """Autoencoder module of Vq3D model"""
 
     def __init__(self, config, global_config):
-        """Class to peform Vq3D foward pass
+        """Class to perform Vq3D forward pass
 
         Args:
             config (BioClipConfig): model hyperparameters
@@ -611,7 +611,7 @@ class ForwardVQ3D(hk.Module):
             batch_data (BatchDataVQ3D): batch data
 
         Returns:
-            decoded_structure: reconstructed strucutre
+            decoded_structure: reconstructed structure
             seq_emb: quantized representation
             quantized_emb: aux embedding and metrics dict
         """

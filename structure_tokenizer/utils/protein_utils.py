@@ -421,7 +421,7 @@ def compute_nearest_neighbors_graph(
         "ijk,nk->inj", basis_matrices, protein_v_i_feat
     )  # orientation edges features 1
     s_ij = np.concatenate([p_ij, q_ij, k_ij, t_ij], axis=-1)
-    # Get edges features for valid (send, reveiver) pairs
+    # Get edges features for valid (send, receiver) pairs
     protein_edge_feat_ori_list = [
         s_ij[receivers[i], senders[i]] for i in range(len(protein_dist_list))
     ]

@@ -54,7 +54,7 @@ RUN pip install -U "huggingface_hub[cli]"
 
 # Disable debug, info, and warning tensorflow logs
 ENV TF_CPP_MIN_LOG_LEVEL=3
-# By default use cpu as the backend for JAX, we will explicitely load data on gpus/tpus as needed.
+# By default use cpu as the backend for JAX, we will explicitly load data on gpus/tpus as needed.
 # ENV JAX_PLATFORM_NAME="cpu"
 
 # Installing the lddt and tm scores
