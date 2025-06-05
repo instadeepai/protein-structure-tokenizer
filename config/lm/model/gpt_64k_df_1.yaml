@@ -1,26 +1,26 @@
 gpt_model:
-    # model HP
-    embed_dim: 1024
-    ffn_embed_dim: 4096
-    num_heads: 16
-    num_layers: 20
-    rope_dimensions: 8
-    block_size: 514
-    add_bias_ffn: false
-    ffn_activation_name: "swish"
-    use_glu_in_ffn: true
-    add_bias_lm_head: false
-    dropout: 0.1
-    # tokens
-    use_bos: true
-    use_eos: true
-    use_pad: true
-    bos_token_id: 64000
-    eos_token_id: 64001
-    pad_token_id: 64002
-    vocab_size: 64003
-  
-  weights_path: "weights/gpt_64k_df_1/params.joblib"
+  # model HP
+  embed_dim: 1024
+  ffn_embed_dim: 4096
+  num_heads: 16
+  num_layers: 20
+  rope_dimensions: 8
+  block_size: 514
+  add_bias_ffn: false
+  ffn_activation_name: "swish"
+  use_glu_in_ffn: true
+  add_bias_lm_head: false
+  dropout: 0.1
+  # tokens
+  use_bos: true
+  use_eos: true
+  use_pad: true
+  bos_token_id: 64000
+  eos_token_id: 64001
+  pad_token_id: 64002
+  vocab_size: 64003
+
+weights_path: "weights/gpt_64k_df_1/params.joblib"
   
   
   
