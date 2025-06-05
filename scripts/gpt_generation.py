@@ -260,10 +260,12 @@ if __name__ == "__main__":
     parser.add_argument("--sequence_save_path", type=str, required=True)
 
     parser.add_argument("--model_downsampling", type=int, choices=[1, 2], default=1)
-    parser.add_argument("--codebook_size", type=int, default=4096, choices=[4096, 64000])
+    parser.add_argument(
+        "--codebook_size", type=int, default=4096, choices=[432, 1731, 4096, 64000]
+        )
     parser.add_argument("--batch_size_per_device", type=int, default=8)
     parser.add_argument(
-        "--params_path", type=str, default="weights/gpt_4k_df_1/params.joblib"
+        "--params_path", type=str, default="weights/gpt_432_df_1/params.joblib"
     )
     parser.add_argument(
         "--backend", type=str, default="gpu", choices=["gpu", "tpu", "cpu"]
@@ -271,10 +273,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    codebook_size = str(args.codebook_size // 1000) + "k"
+    codebook_name = {
+        432: "432", 1731: "1.7k", 4096: "4k", 64000: "64k"
+        }.get(args.codebook_size)
     df = args.model_downsampling
 
-    model_config_name = f"gpt_{codebook_size}_df_{df}.yaml"
+    model_config_name = f"gpt_{codebook_name}_df_{df}.yaml"
     data_config = f"ablation_df_{df}.yaml"
 
     # as of now sampling is fixed
