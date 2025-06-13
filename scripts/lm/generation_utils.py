@@ -71,7 +71,7 @@ def update_top_k_sampling(
         This function implements top_k sampling:
         1. it first select the k highest logits values and indices
         2. it then samples randomly the selected indices using the previously
-            estimated logits (optionnaly rescaled by temperature)
+            estimated logits (optionally rescaled by temperature)
 
     :param tokens_ids:
     :param time_step:
