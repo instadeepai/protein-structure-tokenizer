@@ -49,6 +49,7 @@ COPY . /app
 # Create main working folder
 # RUN mkdir /app
 WORKDIR /app
+RUN pip install 'setuptools<69' wheel
 RUN pip install -e .
 RUN pip install -U "huggingface_hub[cli]"
 
@@ -59,9 +60,10 @@ ENV TF_CPP_MIN_LOG_LEVEL=3
 
 # Installing the lddt and tm scores
 # Install TMalign
+# Install TMalign
 RUN mkdir TMalign-build && \
     cd TMalign-build && \
-    wget https://zhanglab.dcmb.med.umich.edu/TM-align/TMalign.cpp  --no-check-certificate &&\
+    wget -q https://zhanggroup.org/TM-align/TMalign.cpp --no-check-certificate &&\
     g++ -static -O3 -ffast-math -lm -o TMalign TMalign.cpp && \
     chmod +x ./TMalign && \
     mv TMalign /usr/local/bin/ && \
@@ -71,7 +73,7 @@ RUN mkdir TMalign-build && \
 # Install TMscore
 RUN mkdir TMscore-build && \
     cd TMscore-build && \
-    wget https://seq2fun.dcmb.med.umich.edu/TM-score/TMscore.cpp  --no-check-certificate && \
+    wget -q https://zhanggroup.org/TM-score/TMscore.cpp --no-check-certificate && \
     g++ -static -O3 -ffast-math -lm -o TMscore TMscore.cpp && \
     chmod +x ./TMscore && \
     mv TMscore /usr/local/bin/ && \
