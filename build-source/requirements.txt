@@ -12,4 +12,4 @@ ott-jax==0.2.5
 pandas==1.5.2
 regex==2022.1.18
 scipy==1.9.3
-torch==1.11.0
+torch==2.8.0
